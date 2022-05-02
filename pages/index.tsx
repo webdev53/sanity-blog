@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 
       <Header />
 
-      <div className="items-center justify-between border-y border-black bg-blue-300 py-10 lg:py-10">
+      <div className="flex items-center justify-between border-y border-black bg-blue-300 py-10 lg:py-10">
         <div className="space-y-5 px-10">
           <h1 className="max-w-xl font-serif text-6xl">
             This{' '}
@@ -28,7 +28,15 @@ const Home: NextPage = () => {
             with millions of readers.
           </h2>
         </div>
+
+        <img
+          className="hidden h-32 md:inline-flex lg:h-full"
+          src="https://i.ibb.co/2KHgQMH/bold-g.png"
+          alt="logo"
+        />
       </div>
+
+      {/* post */}
     </div>
   )
 }
