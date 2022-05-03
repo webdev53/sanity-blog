@@ -1,17 +1,43 @@
+import { GetStaticProps } from 'next'
 import Header from '../../components/Header'
 import { sanityClient, urlFor } from '../../sanity'
 import { Post } from '../../typings'
-import { GetStaticProps } from 'next'
 
 interface Props {
   post: Post
 }
 
-function Post(post: Props) {
-  console.log(post)
+function Post({ post }: Props) {
   return (
     <main>
       <Header />
+
+      <img
+        className="h-40 w-full object-cover"
+        src={urlFor(post.mainImage).url()!}
+        alt=""
+      />
+
+      <article className="mx-auto max-w-3xl p-5">
+        <h1 className="mt-10 mb-3 text-3xl">{post.title}</h1>
+        <h2 className="mb-2 text-xl font-light text-gray-500">
+          {post.description}
+        </h2>
+
+        <div className="flex items-center space-x-2">
+          <img
+            className="h-10 w-10 rounded-full"
+            src={urlFor(post.author.image).url()!}
+            alt=""
+          />
+
+          <p className="text-sm font-extralight">
+            Blog post by{' '}
+            <span className="text-red-600">{post.author.name}</span> - Published
+            at {new Date(post._createdAt).toLocaleString()}
+          </p>
+        </div>
+      </article>
     </main>
   )
 }
@@ -71,5 +97,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       post,
     },
+    revalidate: 60, // after 60 seconds, updates cache
   }
 }
