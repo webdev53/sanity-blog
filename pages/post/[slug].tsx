@@ -172,6 +172,18 @@ function Post({ post }: Props) {
           />
         </form>
       )}
+      <div className="mx-auto my-10 flex max-w-2xl flex-col space-y-2 p-10 shadow shadow-yellow-500">
+        <h3 className="text-4xl">Comments</h3>
+        <hr className="pb-2" />
+        {post.comments.map((comment) => (
+          <div key={comment._id}>
+            <p>
+              <span className="text-blue-500">{comment.name}</span>:
+              {comment.comment}
+            </p>
+          </div>
+        ))}
+      </div>
     </main>
   )
 }
@@ -210,7 +222,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     image
   },
   'comments':*[
-    _type=="comments" && post._ref==^._id && approved == true],
+    _type=="comment" && post._ref==^._id && approved == true],
     description,
     mainImage,
     slug,
